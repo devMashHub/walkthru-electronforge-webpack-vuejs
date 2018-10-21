@@ -151,3 +151,150 @@ $ git add -A
 $ git commit -m "Installed and tested Vue.js"
 $ git push origin master
 ```
+
+## 6. Install and configure webpack support for Vue single file components
+
+```
+$ npm install -D babel-core
+$ npm install -D babel-loader@7
+$ npm install -D css-loader
+$ npm install -D less-loader
+$ npm install -D vue-loader
+//$ npm install -D babel-preset-env
+//$ npm install -D vue-style-loader
+//$ npm install -D vue-template-compiler
+```
+
+Update the main.html in the src folder:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>walkthru-electronforge-webpack-vuejs</title>
+  </head>
+  <body>
+    <div id="app-element">
+      <app-view></app-view>
+    </div>
+  </body>
+</html>
+
+<script src="../bundles/mainvue.js"></script>
+```
+
+Update the main.js in the src folder:
+
+```js
+import Vue from 'vue/dist/vue.js'
+import AppView from '../src/AppView.vue';
+
+var app = new Vue({
+
+    el: '#app-element',
+    components: {
+        AppView,
+    }
+
+});
+```
+
+Create a new Vue component named AppView.vue in the src folder:
+
+```html
+<style lang='less' scoped>
+	div {
+		margin: 16px;
+		p {
+			color: purple;
+			font-size: 32px;
+		}
+	}
+</style>
+
+<template>
+	<div>
+		<p> {{ message }} </p>
+	</div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                message: 'Hello from your AppView single file component!',
+            }
+        }
+    }
+</script>
+```
+
+Update the webpack config file (webpack.config.js):
+
+```js
+const path = require('path')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
+module.exports = {
+    mode: 'development',
+    entry: {
+        mainvue: './src/main.js'
+    },
+    output: {
+        path: path.resolve(__dirname, 'bundles'),
+        filename: '[name].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]                
+            }
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin()
+    ]
+}
+```
+
+Transpile and package javascript with webpack:
+
+```
+$ npm run wbp
+```
+
+Test Vue.js single file component (AppView.vue) is working:
+
+```
+$ electron-forge start
+```
+
+Commit changes and push git repository (optional):
+
+```	
+$ git add -A
+$ git commit -m "Installed and tested Vue.js"
+$ git push origin master
+```
+
