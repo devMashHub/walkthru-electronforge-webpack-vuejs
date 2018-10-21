@@ -34,4 +34,60 @@ A quick walkthru of getting electron-forge, webpack and vuejs working.
 	> git add -A
 	> git commit -m "Installed scaffolding with electron-forge; initial git configuration"
 	> git push origin master
+
 	
+## 4. Install and configure webpack
+
+	> npm install -D webpack
+	> npm install -D webpack-cli
+
+	Modify your package.json file and add a script for webpack:
+
+		"scripts": {
+			"wbp": "webpack"
+		},
+
+	Create a basic configuration file for webpack (webpack.config.js):
+
+		```js	
+		const path = require('path')
+
+		module.exports = {
+
+			mode: 'development',
+
+			entry: {
+				mainvue: './src/main.js'
+			},
+
+			output: {
+				path: path.resolve(__dirname, 'bundles'),
+				filename: '[name].js'
+			},
+
+			module: {
+				rules: [
+				]
+			},
+			plugins: [
+			]
+		}
+		```
+		
+	Create an empty entrypoint (main.js) in the src folder:
+	
+	> fsutil file createnew src/main.js 0
+	
+	Test webpack:
+	
+	> npm run webpack
+	
+	** Confirm webpack has created an output file called mainvue.js in the bundles folder.
+	
+	Add the bundle folder to .gitignore
+	
+	Commit changes and push git repository (optional):
+	
+	> git add -A
+	> git commit -m "Installed and configured webpack"
+	> git push origin master
