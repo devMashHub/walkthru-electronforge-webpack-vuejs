@@ -89,3 +89,65 @@ $ git add -A
 $ git commit -m "Installed and configured webpack"
 $ git push origin master
 ```
+
+## 5. Install and configure Vue.js
+
+```
+$ npm install vue
+```
+
+Create a new html page named main.html in the src folder:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>walkthru-electronforge-webpack-vuejs</title>
+  </head>
+  <body>
+    <div id="app-element">
+      {{ message }}
+    </div>
+  </body>
+</html>
+
+<script src="main.js"></script>
+```
+
+Modify the existing main.js in the src folder:
+
+```js
+import Vue from 'vue/dist/vue.js'
+
+var app = new Vue({
+    el: '#app-element',
+	data: {
+    message: 'Hello Vue!'
+  }
+});
+```
+
+Modify the existing index.js in the src folder by replacing the line:
+```js
+mainWindow.loadURL(`file://${__dirname}/index.html`);
+```
+with
+```js
+mainWindow.loadURL(`file://${__dirname}/main.html`);
+```
+
+> You may also choose to delete the unused index.html from the src folder
+
+Test Vue.js is working:
+
+```
+$ electron-forge start
+```
+
+Commit changes and push git repository (optional):
+
+```	
+$ git add -A
+$ git commit -m "Installed and tested Vue.js"
+$ git push origin master
+```
