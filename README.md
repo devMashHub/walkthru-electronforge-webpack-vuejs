@@ -8,6 +8,38 @@ A quick walkthru of getting electron-forge, webpack and vuejs working.
 - [Node.js (and NPM)](https://nodejs.org/en/)
 - [Git](https://git-scm.com/)
 - [Electron Forge](https://electronforge.io/)
+
+
+##QuickStart
+
+Clone the repository
+
+```
+$ git clone https://github.com/devMashHub/walkthru-electronforge-webpack-vuejs.git
+$ cd walkthru-electronforge-webpack-vuejs
+```
+
+Install dependencies with NPM
+
+```
+$ npm install
+```
+
+Transpile and package javascript with webpack:
+
+```
+$ npm run wbp
+```
+
+Start the app:
+
+```
+$ electron-forge start
+```
+
+
+> **or build it yourself:**
+
 	
 ## 1. Create the scaffolding using electron-forge
 ```
@@ -294,7 +326,7 @@ Commit changes and push git repository (optional):
 
 ```	
 $ git add -A
-$ git commit -m "Installed and tested Vue.js"
+$ git commit -m "Created and tested Vue.js single file component"
 $ git push origin master
 ```
 
