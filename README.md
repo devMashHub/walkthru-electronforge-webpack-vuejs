@@ -10,7 +10,7 @@ A quick walkthru of getting electron-forge, webpack and vuejs working.
 - [Electron Forge](https://electronforge.io/)
 
 
-##QuickStart
+## QuickStart
 
 Clone the repository
 
